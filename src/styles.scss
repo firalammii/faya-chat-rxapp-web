@@ -1,0 +1,55 @@
+.App{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+
+.form-container {
+    background-color: rgb(67, 104, 188);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .form-wrapper {
+        background-color: white;
+        padding: 20px 60px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap:10px;
+        .logo {
+            font-size: large;
+        }
+        .title {
+            font-size: small;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            .inputs {
+                padding: 5px 10px;
+                border: none;
+                border-bottom: 1px solid rgb(51, 51, 168);
+            }
+            button {
+                background-color: rgb(70, 93, 196);
+                color: white;
+                font-size: large;
+                border:none;
+            }
+            &::placeholder {
+                color: #444;
+            }
+        }
+    }
+
+}
