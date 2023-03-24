@@ -5,7 +5,7 @@ const Message = () => {
         <div className='message'>
             <img src="https://media.istockphoto.com/id/621603944/photo/beautiful-teenage-girl.jpg?s=612x612&w=0&k=20&c=p9e5SFhooPXyv0QuIvxxpstwVqADywMM09uftuUV0VI=" alt="" />
             <div className='last-message-n-time'>
-                <p>last message sdg dsfgsd dsfgdsgsdf  gdsfgds dgsfgsdfg dsfgdfsg gsdgds dfgdsgsd dfgd</p>
+                <p>last message last messagelast message last message last message last message last message last message last message last message last message last message last message</p>
                 <span className='time'>just now</span>
             </div>
         </div>
@@ -17,7 +17,7 @@ export const Message2 = () => {
         <div className='message1'>
 
             <div className='last-message-n-time'>
-                <p>last message sdg dsfgsd dsfgdsgsdf  gdsfgds dgsfgsdfg dsfgdfsg gsdgds dfgdsgsd dfgd</p>
+                <p>last message last message last message last message last message last message last message last message last message last message</p>
                 <span className='time'>just now</span>
             </div>
             <img src="https://media.istockphoto.com/id/621603944/photo/beautiful-teenage-girl.jpg?s=612x612&w=0&k=20&c=p9e5SFhooPXyv0QuIvxxpstwVqADywMM09uftuUV0VI=" alt="" />
