@@ -1,5 +1,7 @@
 import React from 'react';
 import SearchMessages from './SearchMessages';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
+import CallIcon from '@mui/icons-material/Call';
 
 const Navbar = () => {
     return (
@@ -9,6 +11,8 @@ const Navbar = () => {
                 <span className='chat-friend'>Taylor</span>
             </div>
             <SearchMessages />
+            <VideoCallIcon />
+            <CallIcon />
         </div>
     );
 };
