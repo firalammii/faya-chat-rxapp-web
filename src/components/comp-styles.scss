@@ -178,11 +178,11 @@
             flex: 3;
             color: white;
             padding-bottom: 5px;
-            border: 2px solid red;
             display: flex;
             flex-direction: column;
-            
             position: relative;
+            
+            // border: 2px solid red;
 
             .chat-feed-navbar {
                 background-color:#535198;
@@ -250,9 +250,10 @@
             }
 
             .messages {
-                //  border: 2px solid red; 77 72 375
-                height: calc(100% - 150px);
+                //  77 72 375
+                height: calc(100% - 72px);
                 overflow:auto;
+                // border: 2px solid red;
 
                 .message-obj {
                     margin: 10px 10px ;
@@ -326,7 +327,6 @@
                 display: flex;
                 align-items: center;
 
-
                 .typing-form {
                     background-color: white;
                     width: 100%;
@@ -349,7 +349,6 @@
                         border:none;
                         outline: none;
 
-                        
                     }
                     .photo, .attach {
                         cursor: pointer;

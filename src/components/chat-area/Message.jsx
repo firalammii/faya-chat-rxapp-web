@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 
 const Message = () => {
@@ -14,14 +15,14 @@ const Message = () => {
 };
 
 export const Message2 = () => {
-    const { currentUser } = {}
+    const currentUser = useSelector(state => state.users.currentUser)
     return (
         <div className='message1'>
             <div className='last-message-n-time'>
                 <p>last message last message last message last message last message</p>
                 <span className='time'>just now</span>
             </div>
-            {/* <img src={currentUser.photoURL} alt="" /> */}
+            <img src={currentUser.pp} alt="" />
         </div>
     );
 };
