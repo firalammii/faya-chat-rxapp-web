@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Chats from './Chats';
 import Search from './Search';
 
 const Sidebar = () => {
+    const [friends, setFriends] = useState([]);
     return (
         <div className='sidebar'>
-            <Search />
-            <Chats />
+            <Search setFriends={setFriends} />
+            <Chats friends={friends} />
         </div>
     );
 };

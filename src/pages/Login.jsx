@@ -19,15 +19,13 @@ const Login = () => {
 
         const email = e.target[0].value.trim();
         const password = e.target[1].value.trim();
-        try {
-            const user = await users.filter(user => (user.email === email && user.password === password))[0];
+
+        const user = await users.filter(user => (user.email === email && user.password === password))[0];
+        if (user) {
             dispatch(login(user));
             navigate('/');
             setError(false);
-        } catch (error) {
-            setError(true);
-            console.log(error);
-        }
+        } else setError(true);
     }
 
     return (
@@ -35,14 +33,14 @@ const Login = () => {
             <div className='form-wrapper'>
                 <span className='logo'>Lama Chat App</span>
                 <span className='title'>Login</span> <hr />
-                {error && <div className='error'> <p>Soryy! problem occurred</p> </div>}
+                {error && <div className='error'> <p>Soryy! cannot find you</p> </div>}
                 <form onSubmit={handleLogin}>
                     <input type='email' placeholder='email' className='inputs' />
                     <input type='password' placeholder='password' className='inputs' />
                     <button>Log in</button>
                 </form>
                 {error && <div className='error'>
-                    <p>Soryy! problem occurred</p>
+                    <p>It seems you don't have an account</p>
                 </div>}
                 <p>have no account ? <Link to='/register'>Create one</Link></p>
 

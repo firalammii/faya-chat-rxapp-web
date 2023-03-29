@@ -1,8 +1,18 @@
 import React from 'react';
 
-const Chats = () => {
+const Chats = ({ friends }) => {
     return (
         <div className='chat-friends'>
+            {
+                friends.length > 0 &&
+                friends.map(user => <div key={user._id} className="chat">
+                    <img src={user.pp} alt='' />
+                    <div className='username-n-last-message'>
+                        <span className='username'>{user.displayName}</span>
+                        <p className='last-message'>Hello</p>
+                    </div>
+                </div>)
+            }
             <div className="chat">
                 <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
                 <div className='username-n-last-message'>

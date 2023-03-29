@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-const Search = () => {
+const Search = ({ setFriends }) => {
 
     const [searchKey, setSearchKey] = useState('');
-    const [friends, setFriends] = useState([]);
 
     useEffect(() => {
         if (!searchKey) setFriends([]);
@@ -39,16 +38,7 @@ const Search = () => {
                 onChange={(e) => setSearchKey(e.target.value)}
                 onKeyDown={handleKeyDown}
             />
-            {
-                friends.length > 0 &&
-                friends.map(user => <div key={user._id} className="chat">
-                    <img src={user.pp} alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>{user.displayName}</span>
-                        <p className='last-message'>Hello</p>
-                    </div>
-                </div>)
-            }
+
         </div>
     );
 };
