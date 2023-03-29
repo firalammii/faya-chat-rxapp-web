@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
-import { useSelector } from 'react-redux';
 
+import { useSelector } from 'react-redux';
 
 const Message = () => {
     return (
@@ -15,7 +14,9 @@ const Message = () => {
 };
 
 export const Message2 = () => {
+
     const currentUser = useSelector(state => state.users.currentUser)
+
     return (
         <div className='message1'>
             <div className='last-message-n-time'>
@@ -28,5 +29,3 @@ export const Message2 = () => {
 };
 
 export default Message;
-
-// 8063290258

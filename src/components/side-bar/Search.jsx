@@ -20,11 +20,13 @@ const Search = () => {
     };
 
     const users = useSelector(state => state.users.users);
+    const currentUser = useSelector(state => state.users.currentUser)
     // console.log(users);
 
     const handleSearch = async () => {
         try {
-            const withSearchKey = users.filter(user => user.displayName.match(searchKey));
+            const withoutCurrentUser = await users.filter(user => user._id !== currentUser._id);
+            const withSearchKey = await withoutCurrentUser.filter(user => user.displayName.match(searchKey));
             setFriends(withSearchKey);
         } catch (error) {
             console.log(error);

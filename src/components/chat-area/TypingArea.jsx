@@ -1,6 +1,5 @@
 import React from 'react';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
-import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import InsertPhotoRoundedIcon from '@mui/icons-material/InsertPhotoRounded';
 import SendIcon from '@mui/icons-material/Send';
 

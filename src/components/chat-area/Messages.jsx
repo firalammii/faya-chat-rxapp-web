@@ -11,6 +11,12 @@ const Messages = () => {
             <Message />
             <Message2 />
             <Message />
+            <Message2 />
+            <Message />
+            <Message2 />
+            <Message />
+            <Message2 />
+            <Message />
 
         </div>
     );

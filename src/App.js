@@ -12,7 +12,9 @@ import { fetchUsers } from './actions/usersAction';
 
 
 const App = () => {
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
