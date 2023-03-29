@@ -2,7 +2,7 @@ import React from 'react';
 
 const Chats = () => {
     return (
-        <div className='chats'>
+        <div className='chat-friends'>
             <div className="chat">
                 <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
                 <div className='username-n-last-message'>

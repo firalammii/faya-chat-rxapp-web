@@ -1,37 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import FileBase from 'react-file-base64';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { createUser } from '../actions/usersAction';
 
 const Register = () => {
+    const [user, setUser] = useState({
+        displayName: '', email: '', password: '', pp: ''
+    });
+    const [error, setError] = useState(false);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    async function handleSubmit (e) {
+        e.preventDefault();
+        try {
+            const { displayName, email, password } = user;
+            if (!displayName || !email || !password) {
+                throw error;
+            }
+            dispatch(createUser(user));
+            setUser({ displayName: '', email: '', password: '', pp: '' });
+            navigate('/login');
+            setError(false);
+        } catch (err) {
+            setError(true);
+            console.log(err.message);
+        }
+
+    }
+
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setUser({ ...user, [name]: value });
+    };
+    const { displayName, email, password, pp } = user;
+
     return (
         <div className='form-container'>
+            {/* <img src={imgState} alt='' /> */}
             <div className='form-wrapper'>
                 <span className='logo'>Lama Chat App</span>
-                <span className='title'>Register</span>
-                <form>
+                <span className='title'>Register</span> <hr />
+                {error && <div className='error'>
+                    <p>Soryy! problem occurred</p>
+                </div>}
+                <form onSubmit={handleSubmit}>
                     <input
-                        type='text' placeholder='display name' className='inputs'
-                    // value={ }
-                    // onchange={ }
+                        name='displayName' type='text' placeholder='display name' className='inputs'
+                        value={displayName}
+                        onChange={handleChange}
                     />
                     <input
+                        name='email'
                         type='email' placeholder='email' className='inputs'
-                    // value={ }
-                    // onchange={ }
+                        value={email}
+                        onChange={handleChange}
                     />
                     <input
+                        name='password'
                         type='password' placeholder='password' className='inputs'
-                    // value={ }
-                    // onchange={ }
+                        value={password}
+                        onChange={handleChange}
                     />
-                    <input
-                        style={{ display: 'none' }}
-                        type='file' id='file' className='inputs'
-                    // value={ }
-                    // onchange={ }
-                    />
-                    <label className='inputs' htmlFor='file' style={{ color: '#888', fontSize: 'small', textAlign: 'left' }}>Select Avatar</label>
+
+                    <div className='inputs' >
+                        <FileBase value={pp} type="file" multiple={false} onDone={({ base64 }) => setUser({ ...user, pp: base64 })} />
+                    </div>
+
                     <button>Sign up</button>
                 </form>
-                <p>have account already? <span>Login</span></p>
+                {error && <div className='error'>
+                    <p>Soryy! problem occurred</p>
+                </div>}
+                <p>have account already? <Link to='/login'>Login</Link></p>
 
             </div>
 
