@@ -3,13 +3,11 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-
+import { fetchUsers } from './actions/usersAction';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import './styles.scss';
-import { fetchUsers } from './actions/usersAction';
-
 
 const App = () => {
 
@@ -17,11 +15,9 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
+  }, [dispatch]);
 
   const currentUser = useSelector(state => state.users.currentUser);
-  console.log(currentUser);
-
   const ProtectedPage = ({ children }) => {
     if (!currentUser) return <Navigate to='/login' />;
     return children;
@@ -34,12 +30,9 @@ const App = () => {
             <ProtectedPage>
               <Home />
             </ProtectedPage>
-          }
-          />
+          } />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/chat" element={<ProtectedPage />} />
-          {/* <Route path="/chat" element={currentUser ? <Home /> : <Login />} /> */}
-          <Route path="/login" element={currentUser ? <Home /> : <Login />} />
 
         </Routes>
       </Router>

@@ -4,12 +4,8 @@ const { FETCH_USERS, CREATE_USER, LOGIN, LOGOUT } = userActionTypes;
 
 const initialState = {
     users: [],
-    currentUser: null
+    currentUser: JSON.parse(localStorage.getItem('user')) || null
 };
-
-
-
-
 
 export const usersReducer = (state = initialState, actions) => {
     switch (actions.type) {
@@ -24,25 +20,13 @@ export const usersReducer = (state = initialState, actions) => {
         }
 
         case LOGIN: {
-            return { ...state, currentUser: actions.payload };
+            localStorage.setItem('user', JSON.stringify(actions.payload));
+            return { ...state, currentUser: actions.payload }
         }
         case LOGOUT: {
+            localStorage.removeItem('user');
             return { ...state, currentUser: null };
         }
         default: return state;
     }
 };
-
-
-
-// export const usersReducer = (users = [], actions) => {
-//     switch (actions.type) {
-//         case FETCH_USERS: {
-//             return actions.payload;
-//         }
-//         case CREATE_USER: {
-//             return [...users, actions.payload];
-//         }
-//         default: return users;
-//     }
-// };

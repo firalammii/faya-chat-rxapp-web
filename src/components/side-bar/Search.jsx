@@ -9,10 +9,7 @@ const Search = () => {
 
     useEffect(() => {
         if (!searchKey) setFriends([]);
-        else {
-            handleSearch();
-        }
-        // console.log("use Effect"); 
+        else handleSearch();
     }, [searchKey]);
 
     const handleKeyDown = (e) => {
@@ -21,7 +18,6 @@ const Search = () => {
 
     const users = useSelector(state => state.users.users);
     const currentUser = useSelector(state => state.users.currentUser)
-    // console.log(users);
 
     const handleSearch = async () => {
         try {
@@ -32,7 +28,6 @@ const Search = () => {
             console.log(error);
         }
     }
-
 
     return (
         <div className='search-bar'>

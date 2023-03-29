@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../actions/usersAction';
 
 const Navbar = () => {
-    const currentUser = useSelector(state => state.users.currentUser);
-    console.log(currentUser);
 
+    const currentUser = useSelector(state => state.users.currentUser);
     const dispatch = useDispatch();
 
     return (
