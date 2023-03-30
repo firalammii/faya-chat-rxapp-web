@@ -1,6 +1,6 @@
 import React from 'react';
 import Messages from './Messages';
-import Navbar from './Navbar';
+import Navbar from './ChatFeedNavbar';
 import TypingArea from './TypingArea';
 
 const ChatFeed = () => {

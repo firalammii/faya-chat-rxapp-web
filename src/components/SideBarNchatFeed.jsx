@@ -1,6 +1,6 @@
 import React from 'react';
-import ChatFeed from './chat-area/ChatFeed';
-import Sidebar from './side-bar/Sidebar';
+import ChatFeed from './ChatFeed';
+import Sidebar from './Sidebar';
 
 const SideBarNchatFeed = () => {
     return (
