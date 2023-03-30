@@ -20,7 +20,8 @@ export const usersReducer = (state = initialState, actions) => {
         }
 
         case LOGIN: {
-            localStorage.setItem('user', JSON.stringify(actions.payload));
+            const { displayName, email, pp, _id } = actions.payload;
+            localStorage.setItem('user', JSON.stringify({ displayName, email, pp, _id }));
             return { ...state, currentUser: actions.payload }
         }
         case LOGOUT: {

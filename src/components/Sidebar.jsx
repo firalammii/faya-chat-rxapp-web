@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { CircularProgress } from '@mui/material';
+import Chats from './chats'
 
 const Sidebar = () => {
     const [friends, setFriends] = useState([]);
@@ -15,17 +17,27 @@ const Sidebar = () => {
     };
 
     const users = useSelector(state => state.users.users);
+    console.log(users);
     const currentUser = useSelector(state => state.users.currentUser);
-
+    // console.log(currentUser);
     const handleSearch = async () => {
         try {
             const withoutCurrentUser = await users.filter(user => user._id !== currentUser._id);
+            // console.log(withoutCurrentUser)
             const withSearchKey = await withoutCurrentUser.filter(user => user.displayName.match(searchKey));
             setFriends(withSearchKey);
         } catch (error) {
             console.log(error);
         }
     };
+
+    const addToChatList = (chat) => {
+        // chat:{
+        //     users: 
+        // }
+
+    }
+
     return (
         <div className='sidebar'>
             <div className='search-bar'>
@@ -41,144 +53,35 @@ const Sidebar = () => {
 
             <div className='chat-friends'>
                 {
-                    friends.length > 0 &&
-                    friends.map(user => <div key={user._id} className="chat">
+                    friends.length > 0 ?
+                        friends.map(user => <div key={user._id} className="chat" onClick={addToChatList}>
                         <img src={user.pp} alt='' />
                         <div className='username-n-last-message'>
                             <span className='username'>{user.displayName}</span>
                             <p className='last-message'>Hello</p>
                         </div>
                     </div>)
+                        : searchKey && <CircularProgress />
                     //when i have sth to search it overrides the ealier display 
                 }
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Taylor</span>
-                        <p className='last-message'>hy</p>
-                    </div>
+                {
+                    users && users.chats && users.chats.length &&
+                    users.chats.map(chat => {
+                        return (
+                            <div key={chat.uuid} className="chat">
+                                <img src={chat.pp} alt='' />
+                                <div className='username-n-last-message'>
+                                    <span className='username'>chat.displayName</span>
+                                    <p className='last-message'>hy</p>
+                                </div>
+                            </div>
+                        );
+                    })
+                }
 
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Gray</span>
-                        <p className='last-message'>Hello</p>
-                    </div>
 
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Black</span>
-                        <p className='last-message'>love ya</p>
-                    </div>
+                {/* <Chats /> */}
 
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Red</span>
-                        <p className='last-message'>see you</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Taylor</span>
-                        <p className='last-message'>hy</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Gray</span>
-                        <p className='last-message'>Hello</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Black</span>
-                        <p className='last-message'>love ya</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Red</span>
-                        <p className='last-message'>see you</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Taylor</span>
-                        <p className='last-message'>hy</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Gray</span>
-                        <p className='last-message'>Hello</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Black</span>
-                        <p className='last-message'>love ya</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Red</span>
-                        <p className='last-message'>see you</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Taylor</span>
-                        <p className='last-message'>hy</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Gray</span>
-                        <p className='last-message'>Hello</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Black</span>
-                        <p className='last-message'>love ya</p>
-                    </div>
-
-                </div>
-                <div className="chat">
-                    <img src='https://images.pexels.com/photos/935948/pexels-photo-935948.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
-                    <div className='username-n-last-message'>
-                        <span className='username'>Red</span>
-                        <p className='last-message'>see you</p>
-                    </div>
-
-                </div>
             </div>
         </div>
     );
