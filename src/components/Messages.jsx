@@ -5,7 +5,8 @@ import { Message2 } from './Message';
 const Messages = () => {
     return (
         <div className='messages'>
-            <Message />
+
+            {/* <Message />
             <Message2 />
             <Message2 />
             <Message />
@@ -16,7 +17,7 @@ const Messages = () => {
             <Message2 />
             <Message />
             <Message2 />
-            <Message />
+            <Message /> */}
 
         </div>
     );

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login, logout } from "../actions/usersAction";
+import { fetchUsers, login, logout } from "../actions/usersAction";
 
 const Login = () => {
 
@@ -9,6 +9,10 @@ const Login = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchUsers());
+    }, [])
 
     const users = useSelector(state => state.users.users);
     const currentUser = useSelector(state => state.users.currentUser);

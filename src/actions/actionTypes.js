@@ -1,12 +1,25 @@
 
-// export const API_URL = 'http://localhost:3001/users';
-
 export const userActionTypes = {
     FETCH_USERS: 'FETCH_USERS',
     CREATE_USER: 'CREATE_USER',
-
+    UPDATE_USER: 'UPDATE_USER',
+    DELETE_USER: 'DELETE_USER',
 
     LOGIN: 'LOGIN',
     LOGOUT: 'LOGOUT',
+    ACTIVE_FRIEND: 'ACTIVE_FRIEND',
+};
 
+export const messagesActionTypes = {
+    FETCH_MESSAGES: 'FETCH_MESSAGES',
+    CREATE_MESSAGE: 'CREATE_MESSAGE',
+    UPDATE_MESSAGE: 'UPDATE_MESSAGE',
+    DELETE_MESSAGE: 'DELETE_MESSAGE',
+};
+
+export const chatsActionTypes = {
+    FETCH_CHATS: 'FETCH_CHATS',
+    CREATE_CHAT: 'CREATE_CHAT',
+    UPDATE_CHAT: 'UPDATE_CHAT',
+    DELETE_CHAT: 'DELETE_CHAT',
 };
