@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Chats from './chats'
 import { setActiveFriend, updateUser } from '../actions/usersAction';
-import { createChat } from '../actions/chatsActionDispatcher';
+import { createChat, fetchChats, setActiveChat } from '../actions/chatsActionDispatcher';
 
 const Sidebar = () => {
     const [searchedFriends, setSerchedFriends] = useState([]);
@@ -14,17 +15,31 @@ const Sidebar = () => {
         else handleSearch();
     }, [searchKey]);
 
+    useEffect(() => {
+        dispatch(fetchChats());
+    }, [])
+
     const handleKeyDown = (e) => {
         e.code === 'Enter' && handleSearch();
     };
 
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.users);
-    console.log(users);
+    // console.log(users);
     const currentUser = useSelector(state => state.users.currentUser);
-    const activeFriend = useSelector(state => state.users.activeFriend);
-    console.log(currentUser);
-    // const activeChat = useSelector(state => state.users.activeChat);
+    // console.log(currentUser);
+    const allChats = useSelector(state => state.chats.chats);
+    // console.log(allChats);
+    const userChats = allChats.filter(chat => {
+        console.log(chat.users);
+        return chat.users.map(user => user._id === currentUser._id);
+
+    });
+    console.log('userChats', userChats)
+
+
+
+
 
     const handleSearch = async () => {
         try {
@@ -36,21 +51,14 @@ const Sidebar = () => {
         }
     };
 
-    const onSearchResultClick = (friend) => {
-        console.log(currentUser);
+    const startChat = (friend) => {
         dispatch(setActiveFriend(friend));
-
         const chatObj = {
-            // admin: currentUser,
-            users: friend._id,
-        };
-        // dispatch(createChat(chatObj));
-        const user = {
-            ...currentUser,
-            chats: [...currentUser.chats, friend._id]
+            admin: currentUser._id,
+            messages: [],
+            users: [friend, currentUser]
         }
-        dispatch(updateUser(currentUser._id, user));
-        dispatch(updateUser(activeFriend._id, currentUser));
+        dispatch(createChat(chatObj));
     };
 
     return (
@@ -71,12 +79,13 @@ const Sidebar = () => {
                     searchedFriends.length > 0 ?
                         searchedFriends.map(friend => {
                             return (
-                                <div key={friend._id} className="chat" onClick={() => onSearchResultClick(friend)}>
+                                <div key={friend._id} className="chat" >
                                     <img src={friend.pp} alt='' />
                                     <div className='username-n-last-message'>
                                         <span className='username'>{friend.displayName}</span>
-                                        <p className='last-message'>Hello</p>
+                                        {/* <p className='last-message'>Hello</p> */}
                                     </div>
+                                    <AddCircleOutlineIcon className='start-chat-icon' titleAccess='start chat' onClick={() => startChat(friend)} /> 
                                 </div>
                             );
                         })
@@ -84,23 +93,25 @@ const Sidebar = () => {
                     //when i have sth to search it overrides the ealier display 
                 }
                 {
-                    users && users.chats && users.chats.length &&
-                    users.chats.map(chat => {
+                    userChats && userChats.length > 0 &&
+                    userChats.map(chat => {
                         return (
-                            <div key={chat.friend.id} className="chat">
-                                <img src={chat.friend.pp} alt='' />
-                                <div className='username-n-last-message'>
-                                    <span className='username'>chat.friend.displayName</span>
-                                    <p className='last-message'>hy</p>
-                                </div>
-                            </div>
-                        );
+                            chat.users.map(user => {
+                                if (user._id !== currentUser._id)
+                                    return (
+                                        <div key={user._id} className="chat" onClick={() => dispatch(setActiveChat(chat))}>
+                                            <img src={user.pp} alt='' />
+                                            <div className='username-n-last-message'>
+                                                <span className='username'>{user.displayName}</span>
+                                                {/* <p className='last-message'>{chat.messages[chat.messages.length - 1].message}</p> */}
+                                            </div>
+                                        </div>
+                                    );
+                            })
+                        )
                     })
                 }
-
-
                 {/* <Chats /> */}
-
             </div>
         </div>
     );

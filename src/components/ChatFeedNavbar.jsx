@@ -6,16 +6,26 @@ import { useSelector } from 'react-redux';
 
 const Navbar = () => {
 
+    const activeChat = useSelector(state => state.chats.activeChat);
+    // console.log('activeChat', activeChat);
     const activeFriend = useSelector(state => state.users.activeFriend);
-
+    // console.log('activeFriend', activeFriend)
+    const currentUser = useSelector(state => state.users.currentUser)
     return (
         <div className='chat-feed-navbar'>
             {
-                activeFriend ? <>
-                    <div className='chat-friend'>
-                        <img src={activeFriend.pp} alt='' height={40} />
-                        <span className='chat-friend'>{activeFriend.displayName}</span>
-                    </div>
+                activeChat && activeChat.users.length > 0 ? <>
+                    {
+                        activeChat.users.filter(user => user._id !== currentUser._id).map(friend => {
+                            // console.log(friend);
+                            return (
+                                <div key={friend._id} className='chat-friend' >
+                                    <img src={friend.pp} alt='' height={40} />
+                                    <span className='chat-friend'>{friend.displayName}</span>
+                                </div>
+                            );
+                        })
+                    }
                     <SearchMessages />
                     <VideoCallIcon />
                     <CallIcon />

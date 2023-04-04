@@ -19,7 +19,7 @@ const App = () => {
   }, [dispatch]);
 
   const currentUser = useSelector(state => state.users.currentUser);
-
+  console.log(`currentUser:`, currentUser)
   const ProtectedPage = ({ children }) => {
     if (!currentUser) return <Navigate to='/login' />;
     return children;

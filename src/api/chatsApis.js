@@ -5,5 +5,5 @@ const API_URL = 'http://localhost:3000/chats';
 
 export const fetchChats = () => axios.get(API_URL);
 export const createChat = (chatObj) => axios.post(API_URL, chatObj);
-export const updateChat = (id, chatObj) => axios.patch(`${API_URL}/${id}`, chatObj);
+export const updateChat = (id, chatObj) => axios.put(`${API_URL}/${id}`, chatObj);
 export const deleteChat = (id) => axios.delete(`${API_URL}/${id}`);

@@ -1,29 +1,26 @@
+import moment from 'moment';
 
-import { useSelector } from 'react-redux';
+const Message = ({ message, user }) => {
 
-const Message = () => {
     return (
         <div className='message-obj'>
-            <img src="https://media.istockphoto.com/id/621603944/photo/beautiful-teenage-girl.jpg?s=612x612&w=0&k=20&c=p9e5SFhooPXyv0QuIvxxpstwVqADywMM09uftuUV0VI=" alt="" />
+            <img src={user.pp} alt="" />
             <div className='message-n-time'>
-                <p className='message'>last message last message last message last message last message last message</p>
-                <span className='time'>just now</span>
+                <p className='message'>{message.message}</p>
+                <span className='time'>{moment(message.ceatedOn).fromNow()}</span>
             </div>
         </div>
     );
 };
 
-export const Message2 = () => {
-
-    const currentUser = useSelector(state => state.users.currentUser)
-
+export const Message2 = ({ message, user }) => {
     return (
         <div className='message1'>
             <div className='last-message-n-time'>
-                <p>last message last message last message last message last message</p>
-                <span className='time'>just now</span>
+                <p>{message.message}</p>
+                <span className='time'>{moment(message.createdOn).fromNow()}</span>
             </div>
-            <img src={currentUser.pp} alt="" />
+            <img src={user.pp} alt="" />
         </div>
     );
 };

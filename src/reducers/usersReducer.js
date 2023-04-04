@@ -4,33 +4,34 @@ const { FETCH_USERS, CREATE_USER, LOGIN, LOGOUT, ACTIVE_FRIEND } = userActionTyp
 
 const initialState = {
     users: [],
-    currentUser: JSON.parse(localStorage.getItem('user')) || null,
+    currentUser: JSON.parse(localStorage.getItem('currentUser')) || null,
     activeFriend: JSON.parse(localStorage.getItem('activeFriend')) || null,
 };
 
-export const usersReducer = (state = initialState, actions) => {
-    switch (actions.type) {
+export const usersReducer = (state = initialState, action) => {
+    switch (action.type) {
         case FETCH_USERS: {
-            return { ...state, users: actions.payload };
+            return { ...state, users: action.payload };
         }
         case CREATE_USER: {
             return {
                 ...state,
-                users: [...state.users, actions.payload]
+                users: [...state.users, action.payload]
             };
         }
         case LOGIN: {
-            // const { displayName, email, pp, _id } = actions.payload;
-            localStorage.setItem('user', JSON.stringify(actions.payload));
-            return { ...state, currentUser: actions.payload }
+            // const { displayName, email, pp, _id } = action.payload;
+            // localStorage.setItem('currentUser', JSON.stringify(action.payload));
+            return { ...state, currentUser: action.payload }
         }
         case LOGOUT: {
-            localStorage.removeItem('user');
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('activeFriend');
             return { ...state, currentUser: null };
         }
         case ACTIVE_FRIEND: {
-            localStorage.setItem('activeFriend', JSON.stringify(actions.payload));
-            return { ...state, activeFriend: actions.payload };
+            // localStorage.setItem('activeFriend', JSON.stringify(action.payload));
+            return { ...state, activeFriend: action.payload };
         }
         default: return state;
     }

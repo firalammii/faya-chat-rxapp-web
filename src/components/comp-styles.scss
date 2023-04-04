@@ -193,10 +193,21 @@
                             }
                         }
                     }
-
                     &:hover {
                         background-color: #3e3c61;
                     
+                    }
+
+                    .start-chat-icon {
+                        margin-left: auto;
+                        margin-right: 20px;
+                        border-radius: 50%;
+
+                        &:hover {
+                        // background-color: #5b5a78;
+                        color: rgb(13, 189, 45);
+                    
+                    }
                     }
                 }
             }
@@ -266,6 +277,8 @@
             .messages {
                 height: calc(100% - 74px);
                 overflow:auto;
+                display: flex;
+                flex-direction: column;
 
                 // border: 2px solid red;
 
@@ -273,13 +286,13 @@
                     height: calc(100% - 33px);
                 }
                 
-
                 .message-obj {
                     margin: 10px 10px ;
                     display: flex;
                     gap: 5px;
                     width: 60%;
-                    
+
+                    // border: 2px solid red;
 
                     img {
                         width: 20px;
@@ -314,6 +327,9 @@
                     gap: 5px;
                     width: 60%;
                     margin-left: auto;
+                    justify-content: flex-end;
+
+                    // border: 2px solid red;
 
                     img {
                         width: 20px;
@@ -327,11 +343,12 @@
 
                         // border: 2px solid red;
 
-                        p{
+                        p {
                             margin: 0;
                             background-color: rgb(44, 94, 210);
                             padding: 10px;
-                            border-radius: 20px 0 20px 20px ;}
+                            border-radius: 20px 0 20px 20px ;
+                        }
                         .time {
                             font-size: small;
                             color: gray;

@@ -22,17 +22,24 @@ export const createUser = (user) => async (dispatch) => {
     }
 };
 
+export const updateUser = (id, userObj) => (dispatch) => {
 
-export const updateUser = (id, userObj) => async (dispatch) => {
-    console.log(id);
-    console.log(userObj);
-    try {
-        const { data } = await usersApi.updateUser(id, userObj);
-        dispatch({ type: UPDATE_USER, payload: userObj });
-    } catch (error) {
-        console.log(error);
-    }
+    usersApi.updateUser(id, userObj)
+        .then(data => dispatch({ type: UPDATE_USER, payload: data }))
+        .catch((err) => console.log(err))
+
 };
+
+// export const updateUser = (id, userObj) => async (dispatch) => {
+//     console.log(id);
+//     console.log(userObj);
+//     try {
+//         const { data } = await usersApi.updateUser(id, userObj);
+//         dispatch({ type: UPDATE_USER, payload: userObj });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
 export const deleteUser = (id) => async (dispatch) => {
     try {
         const { data } = await usersApi.deleteUser(id);
