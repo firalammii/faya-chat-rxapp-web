@@ -219,9 +219,9 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            overflow: auto;
             
             // border: 2px solid red;
-
             @include mobile {
                 height: calc(100% - 203px);
             }
@@ -233,6 +233,10 @@
                 align-items: center;
                 padding: 1px 10px;
                 height: 44px;
+
+                position: sticky;
+                top: 0;
+
                 
                 // border: 2px solid red;
 
@@ -276,7 +280,7 @@
 
             .messages {
                 height: calc(100% - 74px);
-                overflow:auto;
+                // overflow:auto;
                 display: flex;
                 flex-direction: column;
 
@@ -285,43 +289,8 @@
                 @include mobile {
                     height: calc(100% - 33px);
                 }
-                
-                .message-obj {
-                    margin: 10px 10px ;
-                    display: flex;
-                    gap: 5px;
-                    width: 60%;
 
-                    // border: 2px solid red;
-
-                    img {
-                        width: 20px;
-                        height: 20px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                    }
-                    .message-n-time {
-                        display: grid;
-
-                        // border: 2px solid red;
-                        .message {
-                            margin: 0;
-                            background-color: rgb(119, 57, 105);
-                            padding: 10px;
-                            border-radius: 0 20px 20px;
-
-                        }
-
-                        .time {
-                            font-size: small;
-                            color: gray;
-                            justify-self: flex-end;
-                            align-self: flex-end;
-                        }
-                    }
-                }
-
-                .message1 {
+                .my-message {
                     margin: 10px;
                     display: flex;
                     gap: 5px;
@@ -357,14 +326,51 @@
                         }
                     }
                 }
+                
+                .their-message {
+                    margin: 10px 10px ;
+                    display: flex;
+                    gap: 5px;
+                    width: 60%;
+
+                    // border: 2px solid red;
+
+                    img {
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                    .message-n-time {
+                        display: grid;
+
+                        // border: 2px solid red;
+                        .message {
+                            margin: 0;
+                            background-color: rgb(119, 57, 105);
+                            padding: 10px;
+                            border-radius: 0 20px 20px;
+
+                        }
+
+                        .time {
+                            font-size: small;
+                            color: gray;
+                            justify-self: flex-end;
+                            align-self: flex-end;
+                        }
+                    }
+                }
+
+                
             }
             .typing-area {
                 margin-top: auto;
                 display: flex;
                 align-items: center;
                 width: 100%;
-                // position: absolute;
-                // top: 620px;
+                position: sticky;
+                bottom: 0;
 
                 .typing-form {
                     background-color: white;

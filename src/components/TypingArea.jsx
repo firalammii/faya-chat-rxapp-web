@@ -5,10 +5,9 @@ import SendIcon from '@mui/icons-material/Send';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import { createMessage } from '../actions/messagesActionDispatcher';
-import { createChat, updateChat } from '../actions/chatsActionDispatcher';
+import { updateChat } from '../actions/chatsActionDispatcher';
 
-const TypingArea = () => {
+const TypingArea = ({ toggleMsgSent }) => {
 
     const [text, setText] = useState('');
 
@@ -28,18 +27,10 @@ const TypingArea = () => {
             sender: currentUser._id,
             attachments: []
         };
-        // const chatObj = {
-        //     ...activeChat,
-        //     messages: [
-        //         ...activeChat.messages,
-        //         msgObj
-        //     ]
-        // };
-        // dispatch(createMessage(msgObj));
-        // dispatch(updateChat(activeChat._id, msgObj));
 
         dispatch(updateChat(activeChat._id, msgObj));
         setText('');
+        toggleMsgSent();
     }
 
     return (

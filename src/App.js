@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import './styles.scss';
+import { fetchChats } from './actions/chatsActionDispatcher';
 
 const App = () => {
 
@@ -16,6 +17,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchUsers())
+    dispatch(fetchChats());
   }, [dispatch]);
 
   const currentUser = useSelector(state => state.users.currentUser);

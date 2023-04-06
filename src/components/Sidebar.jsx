@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import Chats from './chats'
-import { setActiveFriend, updateUser } from '../actions/usersAction';
+import { setActiveFriend } from '../actions/usersAction';
 import { createChat, fetchChats, setActiveChat } from '../actions/chatsActionDispatcher';
 
 const Sidebar = () => {
+
     const [searchedFriends, setSerchedFriends] = useState([]);
     const [searchKey, setSearchKey] = useState('');
 
@@ -14,10 +14,6 @@ const Sidebar = () => {
         if (!searchKey) setSerchedFriends([]);
         else handleSearch();
     }, [searchKey]);
-
-    useEffect(() => {
-        dispatch(fetchChats());
-    }, [])
 
     const handleKeyDown = (e) => {
         e.code === 'Enter' && handleSearch();
@@ -30,12 +26,9 @@ const Sidebar = () => {
     // console.log(currentUser);
     const allChats = useSelector(state => state.chats.chats);
     // console.log(allChats);
-    const userChats = allChats.filter(chat => {
-        console.log(chat.users);
-        return chat.users.map(user => user._id === currentUser._id);
 
-    });
-    console.log('userChats', userChats)
+    const userChats = allChats.filter(chat => chat.users[0]._id === currentUser._id || chat.users[1]._id === currentUser._id)
+    // console.log('userChats', userChats)
 
 
 
