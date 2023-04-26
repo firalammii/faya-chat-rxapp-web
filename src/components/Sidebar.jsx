@@ -21,7 +21,7 @@ const Sidebar = () => {
     const currentUser = useSelector(state => state.users.currentUser);
     // console.log(currentUser);
     const allChats = useSelector(state => state.chats.chats);
-    console.log(allChats);
+    console.log('allChats:', allChats);
 
     useEffect(() => {
         if (!searchKey) setSerchedFriends([]);
@@ -38,7 +38,7 @@ const Sidebar = () => {
     const handleSearch = async () => {
         try {
             const withoutCurrentUser = await users.filter(user => user._id !== currentUser._id);
-            const withSearchKey = await withoutCurrentUser.filter(user => user.displayName.match(searchKey));
+            const withSearchKey = await withoutCurrentUser.filter(user => user.username.match(searchKey));
             setSerchedFriends(withSearchKey);
         } catch (error) {
             console.log(error);
@@ -76,7 +76,7 @@ const Sidebar = () => {
                                 <div key={friend._id} className="chat" >
                                     {<img src={friend.pp} alt='' />}
                                     <div className='username-n-last-message'>
-                                        <span className='username'>{friend.displayName}</span>
+                                        <span className='username'>{friend.username}</span>
                                         {/* <p className='last-message'>Hello</p> */}
                                     </div>
                                     <AddCircleOutlineIcon className='start-chat-icon' titleAccess='start chat' onClick={() => startChat(friend)} /> 
@@ -91,13 +91,13 @@ const Sidebar = () => {
                     currChat?.users.map(user => {
                         if (user._id !== currentUser._id) {
                             const image = user.pp ? <img src={user.pp} alt='' className='img' />
-                                : <div className='img'>{user.displayName.slice(0, 2).toUpperCase()}</div>;
+                                : <div className='img'>{user.username.slice(0, 2).toUpperCase()}</div>;
                             return (
                                 // <div key={user._id} className="chat" onClick={() => dispatch(setActiveChat(chat))}>
                                 <div key={user._id} className="chat">
                                     <div className='image'>{image}</div>
                                     <div className='username-n-last-message'>
-                                        <span className='username'>{user.displayName}</span>
+                                        <span className='username'>{user.username}</span>
                                         {/* <p className='last-message'>{chat.messages[chat.messages.length - 1].message}</p> */}
                                     </div>
                                 </div>
@@ -110,14 +110,14 @@ const Sidebar = () => {
                         return (
                             chat.users.map(user => {
                                 const image = user.pp ? <img src={user.pp} alt='' className='img' />
-                                    : <div className='img'>{user.displayName.slice(0, 2).toUpperCase()}</div>;
+                                    : <div className='img'>{user.username.slice(0, 2).toUpperCase()}</div>;
                                 if (user._id !== currentUser._id)
                                     return (
                                         // <div key={user._id} className="chat" onClick={() => dispatch(setActiveChat(chat))}>
                                         <div key={user._id} className="chat" onClick={() => setCurrChat(chat)}>
                                             <div className='image'>{image}</div>
                                             <div className='username-n-last-message'>
-                                                <span className='username'>{user.displayName}</span>
+                                                <span className='username'>{user.username}</span>
                                                 {/* <p className='last-message'>{chat.messages[chat.messages.length - 1].message}</p> */}
                                             </div>
                                         </div>

@@ -3,17 +3,18 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import InsertPhotoRoundedIcon from '@mui/icons-material/InsertPhotoRounded';
 import SendIcon from '@mui/icons-material/Send';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 import { addMessage } from '../actions/chatsActionDispatcher';
 import { Context } from '../context-API/ContextProvider';
+import { createMessage } from '../actions/messagesActionDispatcher';
 
 const TypingArea = () => {
 
     const [text, setText] = useState('');
 
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => state.users.currentUser);
+    const currUser = useSelector(state => state.users.currentUser);
     // const activeFriend = useSelector(state => state.users.activeFriend);
     // const activeChat = useSelector(state => state.chats.activeChat);
     const { currChat, updateCurrChat } = useContext(Context);
@@ -22,19 +23,20 @@ const TypingArea = () => {
 
     const sendMessage = (e) => {
         e.preventDefault();
-        console.log('sending ...');
-        const msgObj = {
-            id: uuidv4(),
-            chatId: currChat._id,
-            message: text,
-            sender: currentUser._id,
-            attachments: [],
-            createdOn: new Date()
-        };
+        if (currChat) {
+            console.log('sending ...');
+            const msgObj = {
+                chatId: currChat?._id,
+                message: text,
+                sender: currUser._id,
+                attachments: [],
+                createdOn: new Date()
+            };
 
-        dispatch(addMessage(currChat._id, msgObj));
-        setText('');
-        updateCurrChat(msgObj)
+            dispatch(createMessage(msgObj));
+            setText('');
+            updateCurrChat(msgObj);
+        }
     }
 
     return (

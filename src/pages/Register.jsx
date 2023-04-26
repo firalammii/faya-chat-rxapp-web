@@ -8,7 +8,7 @@ import { createUser } from '../actions/usersAction';
 
 const Register = () => {
     const [user, setUser] = useState({
-        displayName: '', email: '', password: '', pp: ''
+        username: '', email: '', pwd: '', pp: ''
     });
     const [error, setError] = useState(false);
 
@@ -18,12 +18,12 @@ const Register = () => {
     async function handleSubmit (e) {
         e.preventDefault();
         try {
-            const { displayName, email, password } = user;
-            if (!displayName || !email || !password) {
+            const { username, email, pwd } = user;
+            if (!username || !email || !pwd) {
                 throw error;
             }
             dispatch(createUser(user));
-            setUser({ displayName: '', email: '', password: '', pp: '' });
+            setUser({ username: '', email: '', pwd: '', pp: '' });
             navigate('/login');
             setError(false);
         } catch (err) {
@@ -38,7 +38,7 @@ const Register = () => {
         const value = e.target.value;
         setUser({ ...user, [name]: value });
     };
-    const { displayName, email, password, pp } = user;
+    const { username, email, pwd, pp } = user;
 
     return (
         <div className='form-container'>
@@ -51,8 +51,8 @@ const Register = () => {
                 </div>}
                 <form onSubmit={handleSubmit}>
                     <input
-                        name='displayName' type='text' placeholder='display name' className='inputs'
-                        value={displayName}
+                        name='username' type='text' placeholder='username' className='inputs'
+                        value={username}
                         onChange={handleChange}
                     />
                     <input
@@ -62,9 +62,9 @@ const Register = () => {
                         onChange={handleChange}
                     />
                     <input
-                        name='password'
+                        name='pwd'
                         type='password' placeholder='password' className='inputs'
-                        value={password}
+                        value={pwd}
                         onChange={handleChange}
                     />
 

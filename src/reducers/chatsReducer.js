@@ -5,7 +5,7 @@ const { FETCH_CHATS, CREATE_CHAT, UPDATE_CHAT, DELETE_CHAT, SELECT_CHAT, UPDATE_
 
 const initialState = {
     chats: [],
-    activeChat: null,
+    currChat: null,
 };
 
 export const chatsReducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ export const chatsReducer = (state = initialState, action) => {
             return { ...state, chats: action.payload };
         }
         case CREATE_CHAT: {
-            return { ...state, chats: [...state.chats, action.payload], activeChat: action.payload };
+            return { ...state, chats: [...state.chats, action.payload], currChat: action.payload };
 
         }
         case UPDATE_CHAT: {
@@ -30,7 +30,9 @@ export const chatsReducer = (state = initialState, action) => {
         case ADD_MESSAGE: {
             console.log('payload', action.payload);
             const nchats = state.chats.map(chat => {
-                if (chat._id === action.payload._id) return action.payload;
+                if (chat._id === action.payload.chatId)
+                    return { ...chat, messages: [...chat.messages, action.payload] };
+
                 return chat;
             });
             console.log('nchats', nchats);
@@ -38,14 +40,14 @@ export const chatsReducer = (state = initialState, action) => {
         }
 
         case UPDATE_ACTIVE_CHAT: {
-            return { ...state, activeChat: { ...state.activeChat, messages: [...state.activeChat.messages, action.payload] } }
+            return { ...state, currChat: { ...state.currChat, messages: [...state.currChat.messages, action.payload] } }
         }
         case DELETE_CHAT: {
             const nchats = state.chats.filter(chat => chat._id !== action.payload._id);
             return { ...state, chats: nchats };
         }
         case SELECT_CHAT: {
-            return { ...state, activeChat: action.payload }
+            return { ...state, currChat: action.payload }
         }
 
         default: return state;

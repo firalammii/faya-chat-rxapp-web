@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 import { MyMessage } from './MessageShow';
 import { TheirMessage } from './MessageShow';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchChats } from '../actions/chatsActionDispatcher';
+import { fetchChats, fetchCurrChat } from '../actions/chatsActionDispatcher';
 import { Context } from '../context-API/ContextProvider';
 
 const Messages = () => {
 
     const messagesEndRef = useRef(null);
+    const dispatch = useDispatch();
 
     const { currChat, updateCurrChat } = useContext(Context);
     console.log('currChat', currChat);
@@ -20,6 +23,11 @@ const Messages = () => {
     };
 
     useEffect(() => {
+        if (currChat) {
+            dispatch(fetchCurrChat(currChat?._id));
+        }
+    })
+    useEffect(() => {
         scrollToBottom();
     }, [currChat]);
 
@@ -30,16 +38,14 @@ const Messages = () => {
             const myMessage = currentUser._id === message.sender;
             // console.log(myMessage);
             return (
-                <div className='messages' ref={messagesEndRef}>
+                <div className='messages' ref={messagesEndRef} key={uuidv4()}>
                     {
                         myMessage ?
                             <MyMessage
-                                key={message.id}
                                 message={message} 
                                 user={currentUser}
                             />
                             : <TheirMessage
-                                key={message.text}
                                 message={message}
                                 user={chatFriend}
                             />

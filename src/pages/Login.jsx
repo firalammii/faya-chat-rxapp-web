@@ -22,9 +22,9 @@ const Login = () => {
         if (currentUser) dispatch(logout(currentUser));
 
         const email = e.target[0].value.trim();
-        const password = e.target[1].value.trim();
+        const pwd = e.target[1].value.trim();
 
-        const user = await users.filter(user => (user.email === email && user.password === password))[0];
+        const user = await users.filter(user => (user.email === email && user.pwd === pwd))[0];
         if (user) {
             dispatch(login(user));
             navigate('/');
