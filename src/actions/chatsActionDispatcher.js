@@ -2,7 +2,7 @@
 import * as chatsApi from '../api/chatsApis.js';
 
 import { chatsActionTypes } from "./actionTypes";
-const { FETCH_CHATS, CREATE_CHAT, UPDATE_ACTIVE_CHAT, DELETE_CHAT, SELECT_CHAT } = chatsActionTypes;
+const { FETCH_CHATS, CREATE_CHAT, UPDATE_CHAT, DELETE_CHAT, SELECT_CHAT, ADD_MESSAGE } = chatsActionTypes;
 
 export const fetchChats = () => async (dispatch) => {
     try {
@@ -23,22 +23,23 @@ export const createChat = (chatObj) => async (dispatch) => {
     }
 };
 
-export const updateChat = (id, msgObj) => async (dispatch) => {
+export const addMessage = (chatId, msgObj) => async (dispatch) => {
     try {
-        const { data } = await chatsApi.updateChat(id, msgObj);
-        dispatch({ type: UPDATE_ACTIVE_CHAT, payload: data });
+        const { data } = await chatsApi.addMessage(chatId, msgObj);
+        dispatch({ type: ADD_MESSAGE, payload: data });
     } catch (error) {
         console.log(error);
     }
 };
-// export const updateChat = (id, chatObj) => async (dispatch) => {
-//     try {
-//         const { data } = await chatsApi.updateChat(id, chatObj);
-//         dispatch({ type: UPDATE_CHAT, payload: data });
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
+
+export const updateChat = (chatId, chatObj) => async (dispatch) => {
+    try {
+        const { data } = await chatsApi.updateChat(chatId, chatObj);
+        dispatch({ type: UPDATE_CHAT, payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 export const deleteChat = (id) => async (dispatch) => {
     try {

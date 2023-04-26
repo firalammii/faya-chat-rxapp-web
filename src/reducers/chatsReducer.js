@@ -1,6 +1,6 @@
 
 import { chatsActionTypes } from "../actions/actionTypes";
-const { FETCH_CHATS, CREATE_CHAT, UPDATE_CHAT, DELETE_CHAT, SELECT_CHAT, UPDATE_ACTIVE_CHAT } = chatsActionTypes;
+const { FETCH_CHATS, CREATE_CHAT, UPDATE_CHAT, DELETE_CHAT, SELECT_CHAT, UPDATE_ACTIVE_CHAT, ADD_MESSAGE } = chatsActionTypes;
 
 
 const initialState = {
@@ -20,12 +20,23 @@ export const chatsReducer = (state = initialState, action) => {
 
         }
         case UPDATE_CHAT: {
-            // const nchats = state.chats.map(chat => {
-            //     if (chat._id === action.payload._id) return action.payload;
-            //     else return chat;
-            // });
-            return { ...state, chats: [...state.chats, action.payload] };
+            const nchats = state.chats.map(chat => {
+                if (chat._id === action.payload._id) return action.payload;
+                else return chat;
+            });
+            return { ...state, chats: nchats };
         }
+
+        case ADD_MESSAGE: {
+            console.log('payload', action.payload);
+            const nchats = state.chats.map(chat => {
+                if (chat._id === action.payload._id) return action.payload;
+                return chat;
+            });
+            console.log('nchats', nchats);
+            return { ...state, chats: nchats };
+        }
+
         case UPDATE_ACTIVE_CHAT: {
             return { ...state, activeChat: { ...state.activeChat, messages: [...state.activeChat.messages, action.payload] } }
         }

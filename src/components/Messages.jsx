@@ -1,32 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { MyMessage } from './TextDisplayer';
-import { TheirMessage } from './TextDisplayer';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { MyMessage } from './MessageShow';
+import { TheirMessage } from './MessageShow';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchChats } from '../actions/chatsActionDispatcher';
+import { Context } from '../context-API/ContextProvider';
 
 const Messages = () => {
-    const [currentChat, setCurrentChat] = useState('');
 
-    const dispatch = useDispatch();
+    const messagesEndRef = useRef(null);
+
+    const { currChat, updateCurrChat } = useContext(Context);
+    console.log('currChat', currChat);
+
+    const currentUser = useSelector(state => state.users.currentUser);
+    const chatFriend = currChat?.users.filter(friend => friend._id !== currentUser._id)[0];
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
     useEffect(() => {
-        dispatch(fetchChats());
-
-
-    }, []);
-
-    const activeChat = useSelector(state => state.chats.activeChat);
-    const currentUser = useSelector(state => state.users.currentUser);
-    // console.log(activeChat)
-    const chatFriend = activeChat && activeChat.users.filter(friend => friend._id !== currentUser._id)[0]
+        scrollToBottom();
+    }, [currChat]);
 
     return (
-        activeChat && activeChat.messages.length > 0 &&
-        activeChat.messages.map(message => {
+        currChat && currChat.messages.length > 0 &&
+        currChat.messages.map(message => {
+            // console.log(message)
             const myMessage = currentUser._id === message.sender;
-            console.log(myMessage);
+            // console.log(myMessage);
             return (
-                <div className='messages'>
+                <div className='messages' ref={messagesEndRef}>
                     {
                         myMessage ?
                             <MyMessage
