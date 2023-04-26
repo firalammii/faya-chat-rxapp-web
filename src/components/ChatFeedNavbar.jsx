@@ -8,7 +8,7 @@ import { Context } from '../context-API/ContextProvider';
 const Navbar = () => {
 
     // const activeChat = useSelector(state => state.chats.activeChat);
-    const { currChat, updateCurrChat } = useContext(Context);
+    const { currChat, } = useContext(Context);
     // console.log('currChat', currChat);
     const currentUser = useSelector(state => state.users.currentUser)
     // console.log('currentUser', currentUser);

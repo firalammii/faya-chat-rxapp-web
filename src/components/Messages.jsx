@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { MyMessage } from './MessageShow';
 import { TheirMessage } from './MessageShow';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchChats, fetchCurrChat } from '../actions/chatsActionDispatcher';
+import { fetchCurrChat } from '../actions/chatsActionDispatcher';
 import { Context } from '../context-API/ContextProvider';
 
 const Messages = () => {
@@ -12,7 +12,7 @@ const Messages = () => {
     const messagesEndRef = useRef(null);
     const dispatch = useDispatch();
 
-    const { currChat, updateCurrChat } = useContext(Context);
+    const { currChat, } = useContext(Context);
     console.log('currChat', currChat);
 
     const currentUser = useSelector(state => state.users.currentUser);

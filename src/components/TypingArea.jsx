@@ -4,8 +4,6 @@ import InsertPhotoRoundedIcon from '@mui/icons-material/InsertPhotoRounded';
 import SendIcon from '@mui/icons-material/Send';
 import { useDispatch, useSelector } from 'react-redux';
 // import { v4 as uuidv4 } from 'uuid';
-
-import { addMessage } from '../actions/chatsActionDispatcher';
 import { Context } from '../context-API/ContextProvider';
 import { createMessage } from '../actions/messagesActionDispatcher';
 
