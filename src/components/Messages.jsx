@@ -29,8 +29,8 @@ const Messages = () => {
     }, [currChat]);
 
     return (
-        currChat && currChat.messages.length > 0 &&
-        currChat.messages.map(message => {
+        currChat && currChat?.messages.length > 0 &&
+        currChat?.messages.map(message => {
             // console.log(message)
             const myMessage = currUser._id === message.sender;
             // console.log(myMessage);

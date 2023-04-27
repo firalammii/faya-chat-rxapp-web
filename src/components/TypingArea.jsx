@@ -14,13 +14,15 @@ const TypingArea = () => {
     const dispatch = useDispatch();
 
     // const currUser = useSelector(state => state.users.currUser);
-    // console.log('currUser:', currUser);
+    console.log('currUser:', currUser);
 
     // const currChat = useSelector(state => state.chats.currChat);
     // console.log('currChat:', currChat);
 
     const sendMessage = (e) => {
         e.preventDefault();
+        console.log('currUser:', currUser);
+
         if (currChat) {
             console.log('sending ...');
             const msgObj = {
