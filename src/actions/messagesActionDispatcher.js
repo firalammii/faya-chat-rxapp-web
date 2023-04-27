@@ -19,6 +19,7 @@ export const createMessage = (msgObj) => async (dispatch) => {
         const { data } = await msgApi.createMessage(msgObj);
         dispatch({ type: CREATE_MESSAGE, payload: data });
         dispatch({ type: chatsActionTypes.ADD_MESSAGE, payload: data });
+        return data;
     } catch (error) {
         console.log(error);
     }

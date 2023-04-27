@@ -1,19 +1,19 @@
 
+import { useContext } from 'react';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import CallIcon from '@mui/icons-material/Call';
 
 import SearchMessages from './SearchMessages';
-import { useContext } from 'react';
 import { Context } from '../context-API/ContextProvider';
 
 const Navbar = () => {
     const { currChat, currUser } = useContext(Context);
 
     // const currChat = useSelector(state => state.chats.currChat);
-    console.log('currChat', currChat);
+    // console.log('currChat', currChat);
 
     // const currUser = useSelector(state => state.users.currUser)
-    console.log('currUser', currUser);
+    // console.log('currUser', currUser);
 
     return (
         <div className='chat-feed-navbar'>

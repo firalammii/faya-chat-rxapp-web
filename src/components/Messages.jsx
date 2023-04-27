@@ -8,17 +8,18 @@ import { Context } from '../context-API/ContextProvider';
 const Messages = () => {
 
     const messagesEndRef = useRef(null);
+
     // const dispatch = useDispatch();
     const { currChat, currUser } = useContext(Context)
 
     // const currChat = useSelector(state => state.chats.currChat);
-    console.log('currChat:', currChat);
+    // console.log('currChat:', currChat);
 
     // const currUser = useSelector(state => state.users.currUser);
-    console.log('currUser:', currUser);
+    // console.log('currUser:', currUser);
 
     const chatFriend = currChat?.users.filter(friend => friend._id !== currUser._id)[0];
-    console.log('chatFriend:', chatFriend);
+    // console.log('chatFriend:', chatFriend);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -31,11 +32,15 @@ const Messages = () => {
     return (
         currChat && currChat?.messages.length > 0 &&
         currChat?.messages.map(message => {
-            // console.log(message)
+            console.log('message:', message)
             const myMessage = currUser._id === message.sender;
             // console.log(myMessage);
             return (
-                <div className='messages' ref={messagesEndRef} key={message._id}>
+                <div
+                    key={message._id}
+                    className='messages'
+                    ref={messagesEndRef}
+                >
                     {
                         myMessage ?
                             <MyMessage

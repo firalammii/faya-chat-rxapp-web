@@ -36,7 +36,7 @@ const Sidebar = () => {
     };
 
     const userChats = allChats.filter(chat => chat.users[0]._id === currUser._id || chat.users[1]._id === currUser._id)
-    console.log('userChats:', userChats)
+    // console.log('userChats:', userChats)
 
     const handleSearch = async () => {
         try {

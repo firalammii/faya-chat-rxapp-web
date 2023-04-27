@@ -17,7 +17,6 @@ export const createChat = (chatObj) => async (dispatch) => {
     try {
         const { data } = await chatsApi.createChat(chatObj);
         dispatch({ type: CREATE_CHAT, payload: data });
-        // const { data } = await chatsApi.createChat(chatObj);
     } catch (error) {
         console.log(error);
     }

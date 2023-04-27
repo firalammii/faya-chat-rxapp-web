@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import InsertPhotoRoundedIcon from '@mui/icons-material/InsertPhotoRounded';
 import SendIcon from '@mui/icons-material/Send';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, } from 'react-redux';
 import { createMessage } from '../actions/messagesActionDispatcher';
 import { Context } from '../context-API/ContextProvider';
 
@@ -14,15 +14,13 @@ const TypingArea = () => {
     const dispatch = useDispatch();
 
     // const currUser = useSelector(state => state.users.currUser);
-    console.log('currUser:', currUser);
+    // console.log('currUser:', currUser);
 
     // const currChat = useSelector(state => state.chats.currChat);
     // console.log('currChat:', currChat);
 
-    const sendMessage = (e) => {
+    const sendMessage = async (e) => {
         e.preventDefault();
-        console.log('currUser:', currUser);
-
         if (currChat) {
             console.log('sending ...');
             const msgObj = {
@@ -30,12 +28,14 @@ const TypingArea = () => {
                 message: text,
                 sender: currUser._id,
                 attachments: [],
-                createdOn: new Date()
+                createdOn: new Date(),
             };
 
-            dispatch(createMessage(msgObj));
+            const savedMsg = await dispatch(createMessage(msgObj));
+            // console.log(savedMsg);
             setText('');
-            updateCurrChat(msgObj);
+            updateCurrChat(savedMsg);
+
         }
     }
 

@@ -25,9 +25,9 @@ const ContextProvider = ({ children }) => {
     };
 
     function changeCurrChat (chat) {
-        dispatch(fetchChats());
-        dispatch(fetchMessages());
-        dispatch(fetchUsers());
+        // dispatch(fetchChats());
+        // dispatch(fetchMessages());
+        // dispatch(fetchUsers());
         setCurrChat(chat);
     }
     function login (user) {
