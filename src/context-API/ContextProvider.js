@@ -18,7 +18,7 @@ const ContextProvider = ({ children }) => {
         dispatch(fetchUsers());
         dispatch(fetchChats());
         dispatch(fetchMessages());
-    }, [currChat, currUser]);
+    }, []);
 
     const updateCurrChat = (msgObj) => {
         setCurrChat({ ...currChat, messages: [...currChat.messages, msgObj] });
