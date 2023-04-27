@@ -30,12 +30,9 @@ const TypingArea = () => {
                 attachments: [],
                 createdOn: new Date(),
             };
-
             const savedMsg = await dispatch(createMessage(msgObj));
-            // console.log(savedMsg);
             setText('');
             updateCurrChat(savedMsg);
-
         }
     }
 

@@ -1,16 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useRef, } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { MyMessage } from './MessageShow';
 import { TheirMessage } from './MessageShow';
 import { Context } from '../context-API/ContextProvider';
+import { fetchChats } from '../actions/chatsActionDispatcher';
 
 const Messages = () => {
 
     const messagesEndRef = useRef(null);
 
-    // const dispatch = useDispatch();
-    const { currChat, currUser } = useContext(Context)
+    const dispatch = useDispatch();
+    const { currChat, currUser } = useContext(Context);
+
+    useEffect(() => {
+        dispatch(fetchChats());
+    }, [currChat, currUser]);
 
     // const currChat = useSelector(state => state.chats.currChat);
     // console.log('currChat:', currChat);
@@ -32,7 +38,7 @@ const Messages = () => {
     return (
         currChat && currChat?.messages.length > 0 &&
         currChat?.messages.map(message => {
-            console.log('message:', message)
+            // console.log('message:', message)
             const myMessage = currUser._id === message.sender;
             // console.log(myMessage);
             return (

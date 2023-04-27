@@ -18,16 +18,13 @@ const ContextProvider = ({ children }) => {
         dispatch(fetchUsers());
         dispatch(fetchChats());
         dispatch(fetchMessages());
-    }, []);
+    }, [currChat, currUser]);
 
     const updateCurrChat = (msgObj) => {
         setCurrChat({ ...currChat, messages: [...currChat.messages, msgObj] });
     };
 
     function changeCurrChat (chat) {
-        // dispatch(fetchChats());
-        // dispatch(fetchMessages());
-        // dispatch(fetchUsers());
         setCurrChat(chat);
     }
     function login (user) {
