@@ -9,11 +9,11 @@ import { Context } from '../context-API/ContextProvider';
 const TypingArea = () => {
 
     const [text, setText] = useState('');
-    const { currChat, updateCurrChat } = useContext(Context)
+    const { currChat, updateCurrChat, currUser } = useContext(Context)
 
     const dispatch = useDispatch();
 
-    const currUser = useSelector(state => state.users.currUser);
+    // const currUser = useSelector(state => state.users.currUser);
     // console.log('currUser:', currUser);
 
     // const currChat = useSelector(state => state.chats.currChat);
