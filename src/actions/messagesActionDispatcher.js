@@ -1,7 +1,7 @@
 
 import * as msgApi from '../api/messageApis.js';
-import { messagesActionTypes } from "./actionTypes";
-import { chatsActionTypes } from "./actionTypes";
+import { messagesActionTypes } from "./actionTypes.js";
+import { chatsActionTypes } from "./actionTypes.js";
 
 const { FETCH_MESSAGES, CREATE_MESSAGE, UPDATE_MESSAGE, DELETE_MESSAGE, } = messagesActionTypes;
 

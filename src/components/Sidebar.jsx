@@ -11,15 +11,17 @@ const Sidebar = () => {
     const [searchedFriends, setSerchedFriends] = useState([]);
     const [searchKey, setSearchKey] = useState('');
 
-    const { currChat, setCurrChat } = useContext(Context);
+    const { currChat, changeCurrChat } = useContext(Context);
     // console.log('currChat', currChat)
 
     const dispatch = useDispatch();
 
     const users = useSelector(state => state.users.users);
-    // console.log(users);
-    const currentUser = useSelector(state => state.users.currentUser);
-    // console.log(currentUser);
+    // console.log('users:', users);
+
+    const currUser = useSelector(state => state.users.currUser);
+    console.log('currUser:', currUser);
+
     const allChats = useSelector(state => state.chats.chats);
     console.log('allChats:', allChats);
 
@@ -32,13 +34,13 @@ const Sidebar = () => {
         e.code === 'Enter' && handleSearch();
     };
 
-    const userChats = allChats.filter(chat => chat.users[0]._id === currentUser._id || chat.users[1]._id === currentUser._id)
+    const userChats = allChats.filter(chat => chat.users[0]._id === currUser._id || chat.users[1]._id === currUser._id)
     console.log('userChats', userChats)
 
     const handleSearch = async () => {
         try {
-            const withoutCurrentUser = await users.filter(user => user._id !== currentUser._id);
-            const withSearchKey = await withoutCurrentUser.filter(user => user.username.match(searchKey));
+            const withoutcurrUser = await users.filter(user => user._id !== currUser._id);
+            const withSearchKey = await withoutcurrUser.filter(user => user.username.match(searchKey));
             setSerchedFriends(withSearchKey);
         } catch (error) {
             console.log(error);
@@ -48,9 +50,9 @@ const Sidebar = () => {
     const startChat = (friend) => {
         dispatch(setActiveFriend(friend));
         const chatObj = {
-            admin: currentUser._id,
+            admin: currUser._id,
             messages: [],
-            users: [friend, currentUser]
+            users: [friend, currUser]
         }
         dispatch(createChat(chatObj));
     };
@@ -79,7 +81,11 @@ const Sidebar = () => {
                                         <span className='username'>{friend.username}</span>
                                         {/* <p className='last-message'>Hello</p> */}
                                     </div>
-                                    <AddCircleOutlineIcon className='start-chat-icon' titleAccess='start chat' onClick={() => startChat(friend)} /> 
+                                    <AddCircleOutlineIcon
+                                        className='start-chat-icon'
+                                        titleAccess='start chat'
+                                        onClick={() => startChat(friend)}
+                                    /> 
                                 </div>
                             );
                         })
@@ -89,7 +95,7 @@ const Sidebar = () => {
 
                 {
                     currChat?.users.map(user => {
-                        if (user._id !== currentUser._id) {
+                        if (user._id !== currUser._id) {
                             const image = user.pp ? <img src={user.pp} alt='' className='img' />
                                 : <div className='img'>{user.username.slice(0, 2).toUpperCase()}</div>;
                             return (
@@ -111,10 +117,10 @@ const Sidebar = () => {
                             chat.users.map(user => {
                                 const image = user.pp ? <img src={user.pp} alt='' className='img' />
                                     : <div className='img'>{user.username.slice(0, 2).toUpperCase()}</div>;
-                                if (user._id !== currentUser._id)
+                                if (user._id !== currUser._id)
                                     return (
                                         // <div key={user._id} className="chat" onClick={() => dispatch(setActiveChat(chat))}>
-                                        <div key={user._id} className="chat" onClick={() => setCurrChat(chat)}>
+                                        <div key={user._id} className="chat" onClick={() => changeCurrChat(chat)}>
                                             <div className='image'>{image}</div>
                                             <div className='username-n-last-message'>
                                                 <span className='username'>{user.username}</span>

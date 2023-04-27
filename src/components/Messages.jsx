@@ -15,8 +15,8 @@ const Messages = () => {
     const { currChat, } = useContext(Context);
     console.log('currChat', currChat);
 
-    const currentUser = useSelector(state => state.users.currentUser);
-    const chatFriend = currChat?.users.filter(friend => friend._id !== currentUser._id)[0];
+    const currUser = useSelector(state => state.users.currUser);
+    const chatFriend = currChat?.users.filter(friend => friend._id !== currUser._id)[0];
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -35,7 +35,7 @@ const Messages = () => {
         currChat && currChat.messages.length > 0 &&
         currChat.messages.map(message => {
             // console.log(message)
-            const myMessage = currentUser._id === message.sender;
+            const myMessage = currUser._id === message.sender;
             // console.log(myMessage);
             return (
                 <div className='messages' ref={messagesEndRef} key={uuidv4()}>
@@ -43,7 +43,7 @@ const Messages = () => {
                         myMessage ?
                             <MyMessage
                                 message={message} 
-                                user={currentUser}
+                                user={currUser}
                             />
                             : <TheirMessage
                                 message={message}

@@ -1,7 +1,7 @@
 
 import * as chatsApi from '../api/chatsApis.js';
 
-import { chatsActionTypes } from "./actionTypes";
+import { chatsActionTypes } from "./actionTypes.js";
 const { FETCH_CHATS, CREATE_CHAT, UPDATE_CHAT, DELETE_CHAT, SELECT_CHAT, ADD_MESSAGE } = chatsActionTypes;
 
 export const fetchChats = () => async (dispatch) => {

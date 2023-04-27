@@ -4,7 +4,7 @@ const { FETCH_USERS, CREATE_USER, LOGIN, LOGOUT, ACTIVE_FRIEND } = userActionTyp
 
 const initialState = {
     users: [],
-    currentUser: JSON.parse(localStorage.getItem('currentUser')) || null,
+    currUser: JSON.parse(localStorage.getItem('currUser')) || null,
     activeFriend: JSON.parse(localStorage.getItem('activeFriend')) || null,
 };
 
@@ -20,14 +20,14 @@ export const usersReducer = (state = initialState, action) => {
             };
         }
         case LOGIN: {
-            // const { displayName, email, pp, _id } = action.payload;
-            // localStorage.setItem('currentUser', JSON.stringify(action.payload));
-            return { ...state, currentUser: action.payload }
+            const partialUserInfo = { ...action.payload, pwd: '**********' };
+            localStorage.setItem('currUser', JSON.stringify(partialUserInfo));
+            return { ...state, currUser: action.payload }
         }
         case LOGOUT: {
-            localStorage.removeItem('currentUser');
+            localStorage.removeItem('currUser');
             localStorage.removeItem('activeFriend');
-            return { ...state, currentUser: null };
+            return { ...state, currUser: null };
         }
         case ACTIVE_FRIEND: {
             // localStorage.setItem('activeFriend', JSON.stringify(action.payload));

@@ -10,16 +10,16 @@ const Navbar = () => {
     // const activeChat = useSelector(state => state.chats.activeChat);
     const { currChat, } = useContext(Context);
     // console.log('currChat', currChat);
-    const currentUser = useSelector(state => state.users.currentUser)
-    // console.log('currentUser', currentUser);
+    const currUser = useSelector(state => state.users.currUser)
+    // console.log('currUser', currUser);
 
     return (
         <div className='chat-feed-navbar'>
             {
-                currChat && currChat.users.length > 0 ?
+                currChat?.users?.length > 0 ?
                     <>
                     {
-                            currChat.users.filter(user => user._id !== currentUser._id).map(friend => {
+                            currChat.users.filter(user => user._id !== currUser._id).map(friend => {
                             // console.log(friend);
                                 const image = friend.pp ? <img src={friend.pp} alt='' className='img' />
                                     : <div className='img'>{friend.username.slice(0, 2).toUpperCase()}</div>;

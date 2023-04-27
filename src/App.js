@@ -10,20 +10,22 @@ import Register from './pages/Register';
 import './styles.scss';
 import { fetchUsers } from './actions/usersAction';
 import { fetchChats } from './actions/chatsActionDispatcher';
+import { fetchMessages } from './actions/messagesActionDispatcher';
 
 const App = () => {
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUsers())
+    dispatch(fetchUsers());
     dispatch(fetchChats());
+    dispatch(fetchMessages())
   }, [dispatch]);
 
-  const currentUser = useSelector(state => state.users.currentUser);
-  console.log(`currentUser:`, currentUser)
+  const currUser = useSelector(state => state.users.currUser);
+  console.log(`currUser:`, currUser)
   const ProtectedPage = ({ children }) => {
-    if (!currentUser) return <Navigate to='/login' />;
+    if (!currUser) return <Navigate to='/login' />;
     return children;
   }
 
@@ -33,7 +35,7 @@ const App = () => {
         <Routes path='/'>
           <Route index element={
             <ProtectedPage>
-              {!currentUser ? <CircularProgress /> : <Home />}
+              {!currUser ? <CircularProgress /> : <Home />}
             </ProtectedPage>
           } />
           <Route path="/login" element={<Login />} />

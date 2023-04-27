@@ -12,7 +12,7 @@ const TypingArea = () => {
     const [text, setText] = useState('');
 
     const dispatch = useDispatch();
-    const currUser = useSelector(state => state.users.currentUser);
+    const currUser = useSelector(state => state.users.currUser);
     // const activeFriend = useSelector(state => state.users.activeFriend);
     // const activeChat = useSelector(state => state.chats.activeChat);
     const { currChat, updateCurrChat } = useContext(Context);

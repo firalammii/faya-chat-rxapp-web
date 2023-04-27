@@ -5,16 +5,16 @@ import { logout } from '../actions/usersAction';
 const Navbar = () => {
 
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => state.users.currentUser);
-    const image = currentUser.pp ? <img src={currentUser.pp} alt='' className='img' />
-        : <div className='img'>{currentUser.username.slice(0, 2).toUpperCase()}</div>;
+    const currUser = useSelector(state => state.users.currUser);
+    const image = currUser.pp ? <img src={currUser.pp} alt='' className='img' />
+        : <div className='img'>{currUser.username.slice(0, 2).toUpperCase()}</div>;
 
     return (
         <div className='navbar'>
             <span className="logo">Chat App</span>
             <div className="display-name-n-btn">
                 <div className='image'>{image}</div>
-                <p className="username">{currentUser.username}</p>
+                <p className="username">{currUser.username}</p>
                 <button className="logout" onClick={() => dispatch(logout())}>Log out</button>
             </div>
         </div>

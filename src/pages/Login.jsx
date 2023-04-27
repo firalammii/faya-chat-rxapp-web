@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchUsers, login, logout } from "../actions/usersAction";
+import { login, logout } from "../actions/usersAction";
 
 const Login = () => {
 
@@ -10,16 +10,12 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchUsers());
-    }, [])
-
     const users = useSelector(state => state.users.users);
-    const currentUser = useSelector(state => state.users.currentUser);
+    const currUser = useSelector(state => state.users.currUser);
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        if (currentUser) dispatch(logout(currentUser));
+        if (currUser) dispatch(logout(currUser));
 
         const email = e.target[0].value.trim();
         const pwd = e.target[1].value.trim();
