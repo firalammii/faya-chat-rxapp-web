@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
-import { createContext, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { createContext, useState, useEffect } from "react";
+import { useDispatch, } from "react-redux";
+
 import { fetchChats } from "../actions/chatsActionDispatcher";
 import { fetchMessages } from "../actions/messagesActionDispatcher";
 import { fetchUsers } from "../actions/usersAction";
@@ -40,14 +40,14 @@ const ContextProvider = ({ children }) => {
         setCurrUser(null);
     }
 
-    const users = useSelector(state => state.users.users);
+    // const users = useSelector(state => state.users.users);
     // console.log('users:', users);
 
-    const chats = useSelector(state => state.chats.chats);
+    // const chats = useSelector(state => state.chats.chats);
     // console.log('chats:', chats);
 
-    const messages = useSelector(state => state.messages.messages);
-  // console.log('messages:', messages);
+    // const messages = useSelector(state => state.messages.messages);
+    // console.log('messages:', messages);
 
     return (
         <Context.Provider

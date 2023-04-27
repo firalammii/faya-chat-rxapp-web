@@ -2,7 +2,7 @@
 import * as usersApi from '../api/usersApi.js';
 
 import { userActionTypes } from './actionTypes.js';
-const { FETCH_USERS, CREATE_USER, UPDATE_USER, DELETE_USER, LOGIN, LOGOUT, ACTIVE_FRIEND } = userActionTypes;
+const { FETCH_USERS, CREATE_USER, UPDATE_USER, DELETE_USER, } = userActionTypes;
 
 export const fetchUsers = () => async (dispatch) => {
     try {
@@ -40,17 +40,3 @@ export const deleteUser = (id) => async (dispatch) => {
         console.log(error);
     }
 };
-
-
-
-export const login = (user) => async (dispatch) => {
-    dispatch({ type: LOGIN, payload: user });
-};
-export const logout = (user) => async (dispatch) => {
-    dispatch({ type: LOGOUT, payload: user });
-}
-export const setActiveFriend = (friend) => async (dispatch) => {
-    dispatch({ type: ACTIVE_FRIEND, payload: friend });
-}
-
-
