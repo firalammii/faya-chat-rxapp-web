@@ -19,20 +19,7 @@ export const usersReducer = (state = initialState, action) => {
                 users: [...state.users, action.payload]
             };
         }
-        case LOGIN: {
-            const partialUserInfo = { ...action.payload, pwd: '**********' };
-            localStorage.setItem('currUser', JSON.stringify(partialUserInfo));
-            return { ...state, currUser: action.payload }
-        }
-        case LOGOUT: {
-            localStorage.removeItem('currUser');
-            localStorage.removeItem('activeFriend');
-            return { ...state, currUser: null };
-        }
-        case ACTIVE_FRIEND: {
-            // localStorage.setItem('activeFriend', JSON.stringify(action.payload));
-            return { ...state, activeFriend: action.payload };
-        }
+
         default: return state;
     }
 };

@@ -10,9 +10,9 @@ ReactDOM.createRoot(document.getElementById('root'))
     .render(
         <Provider store={store}>
             <ContextProvider>
-                <StrictMode>
+                {/* <StrictMode> */}
                     <App />
-                </StrictMode>
+                {/* </StrictMode> */}
             </ContextProvider>
 
         </Provider>

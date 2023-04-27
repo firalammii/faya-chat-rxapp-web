@@ -1,9 +1,7 @@
 import axios from "axios";
+import baseUrl from "./base-url";
 
-const API_URL = 'http://localhost:3000/messages';
-// const API_URL = 'https://faya-chat-app-api.onrender.com/messages';
-
-export const fetchMessages = () => axios.get(API_URL);
-export const createMessage = (msgObj) => axios.post(API_URL, msgObj);
-export const updateMessage = (id, msgObj) => axios.patch(`${API_URL}/${id}`, msgObj);
-export const deleteMessage = (id) => axios.delete(`${API_URL}/${id}`);
+export const fetchMessages = () => axios.get(`${baseUrl}/messages`);
+export const createMessage = (msgObj) => axios.post(`${baseUrl}/messages`, msgObj);
+export const updateMessage = (id, msgObj) => axios.patch(`${baseUrl}/messages/${id}`, msgObj);
+export const deleteMessage = (id) => axios.delete(`${baseUrl}/messages/${id}`);

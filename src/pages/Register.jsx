@@ -44,7 +44,7 @@ const Register = () => {
         <div className='form-container'>
             {/* <img src={imgState} alt='' /> */}
             <div className='form-wrapper'>
-                <span className='logo'>Lama Chat App</span>
+                <span className='logo'>Faya Chat App</span>
                 <span className='title'>Register</span> <hr />
                 {error && <div className='error'>
                     <p>Soryy! problem occurred</p>

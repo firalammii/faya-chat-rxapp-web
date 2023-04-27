@@ -1,11 +1,10 @@
 
 import { chatsActionTypes } from "../actions/actionTypes";
-const { FETCH_CHATS, CREATE_CHAT, UPDATE_CHAT, DELETE_CHAT, SELECT_CHAT, UPDATE_ACTIVE_CHAT, ADD_MESSAGE } = chatsActionTypes;
+const { FETCH_CHATS, CREATE_CHAT, UPDATE_CHAT, DELETE_CHAT, ADD_MESSAGE } = chatsActionTypes;
 
 
 const initialState = {
     chats: [],
-    currChat: null,
 };
 
 export const chatsReducer = (state = initialState, action) => {
@@ -16,6 +15,7 @@ export const chatsReducer = (state = initialState, action) => {
             return { ...state, chats: action.payload };
         }
         case CREATE_CHAT: {
+            console.log('chat created:', action.payload)
             return { ...state, chats: [...state.chats, action.payload], currChat: action.payload };
 
         }
@@ -39,16 +39,11 @@ export const chatsReducer = (state = initialState, action) => {
             return { ...state, chats: nchats };
         }
 
-        case UPDATE_ACTIVE_CHAT: {
-            return { ...state, currChat: { ...state.currChat, messages: [...state.currChat.messages, action.payload] } }
-        }
         case DELETE_CHAT: {
             const nchats = state.chats.filter(chat => chat._id !== action.payload._id);
             return { ...state, chats: nchats };
         }
-        case SELECT_CHAT: {
-            return { ...state, currChat: action.payload }
-        }
+
 
         default: return state;
     }

@@ -3,28 +3,28 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import InsertPhotoRoundedIcon from '@mui/icons-material/InsertPhotoRounded';
 import SendIcon from '@mui/icons-material/Send';
 import { useDispatch, useSelector } from 'react-redux';
-// import { v4 as uuidv4 } from 'uuid';
-import { Context } from '../context-API/ContextProvider';
 import { createMessage } from '../actions/messagesActionDispatcher';
+import { Context } from '../context-API/ContextProvider';
 
 const TypingArea = () => {
 
     const [text, setText] = useState('');
+    const { currChat, updateCurrChat } = useContext(Context)
 
     const dispatch = useDispatch();
-    const currUser = useSelector(state => state.users.currUser);
-    // const activeFriend = useSelector(state => state.users.activeFriend);
-    // const activeChat = useSelector(state => state.chats.activeChat);
-    const { currChat, updateCurrChat } = useContext(Context);
 
-    // console.log(activeChat);
+    const currUser = useSelector(state => state.users.currUser);
+    // console.log('currUser:', currUser);
+
+    // const currChat = useSelector(state => state.chats.currChat);
+    // console.log('currChat:', currChat);
 
     const sendMessage = (e) => {
         e.preventDefault();
         if (currChat) {
             console.log('sending ...');
             const msgObj = {
-                chatId: currChat?._id,
+                chatId: currChat._id,
                 message: text,
                 sender: currUser._id,
                 attachments: [],
@@ -48,7 +48,9 @@ const TypingArea = () => {
                 />
                 <InsertPhotoRoundedIcon titleAccess='add foto' className='photo' />
                 <AttachFileIcon titleAccess='add file' className='attach' />
-                <button ><SendIcon titleAccess='send' /> </button>
+                <button >
+                    <SendIcon titleAccess='send' />
+                </button>
             </form>
         </div>
     );

@@ -1,12 +1,10 @@
 import axios from "axios";
+import baseUrl from "./base-url";
 
-const API_URL = 'http://localhost:3000/chats';
-// const API_URL = 'https://faya-chat-app-api.onrender.com/chats';
+export const fetchChats = () => axios.get(`${baseUrl}/chats`);
+export const createChat = (chatObj) => axios.post(`${baseUrl}/chats`, chatObj);
+export const addMessage = (chatId, msgObj) => axios.put(`${baseUrl}/chats/addmsg/${chatId}`, msgObj);
+export const updateChat = (chatId, chatObj) => axios.patch(`${baseUrl}/chats/update/${chatId}`, chatObj);
+export const deleteChat = (id) => axios.delete(`${baseUrl}/chats/${id}`);
 
-export const fetchChats = () => axios.get(API_URL);
-export const createChat = (chatObj) => axios.post(API_URL, chatObj);
-export const addMessage = (chatId, msgObj) => axios.put(`${API_URL}/addmsg/${chatId}`, msgObj);
-export const updateChat = (chatId, chatObj) => axios.patch(`${API_URL}/update/${chatId}`, chatObj);
-export const deleteChat = (id) => axios.delete(`${API_URL}/${id}`);
-
-export const fetchCurrChat = (chatId) => axios.get(`${API_URL}/findchat/${chatId}`);
+export const fetchCurrChat = (chatId) => axios.get(`${baseUrl}/chats/findchat/${chatId}`);

@@ -17,7 +17,7 @@ export const MyMessage = ({ message, user }) => {
 
 export const TheirMessage = ({ message, user }) => {
     const image = user.pp ? <img src={user.pp} alt='' className='img' />
-        : <div className='img'>{user.username.slice(0, 2).toUpperCase()}</div>;
+        : <div className='img'>{user?.username?.slice(0, 2).toUpperCase()}</div>;
     return (
         <div className='their-message'>
             <div className='image'>{image}</div>

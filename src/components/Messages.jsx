@@ -11,12 +11,16 @@ const Messages = () => {
 
     const messagesEndRef = useRef(null);
     const dispatch = useDispatch();
+    const { currChat, currUser } = useContext(Context)
 
-    const { currChat, } = useContext(Context);
-    console.log('currChat', currChat);
+    // const currChat = useSelector(state => state.chats.currChat);
+    console.log('currChat:', currChat);
 
-    const currUser = useSelector(state => state.users.currUser);
+    // const currUser = useSelector(state => state.users.currUser);
+    console.log('currUser:', currUser);
+
     const chatFriend = currChat?.users.filter(friend => friend._id !== currUser._id)[0];
+    console.log('chatFriend:', chatFriend);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

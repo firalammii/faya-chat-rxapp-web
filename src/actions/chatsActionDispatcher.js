@@ -50,10 +50,6 @@ export const deleteChat = (id) => async (dispatch) => {
     }
 };
 
-export const setActiveChat = (chat) => async (dispatch) => {
-    dispatch({ type: SELECT_CHAT, payload: chat });
-};
-
 export const fetchCurrChat = (chatId) => async (dispatch) => {
     try {
         const { data } = await chatsApi.fetchCurrChat(chatId);
