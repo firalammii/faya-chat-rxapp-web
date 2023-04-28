@@ -10,6 +10,7 @@ const Sidebar = () => {
 
     const [searchedFriends, setSerchedFriends] = useState([]);
     const [searchKey, setSearchKey] = useState('');
+    const [userChats, setUserChats] = useState([]);
 
     const dispatch = useDispatch();
     const { currChat, currUser, changeCurrChat } = useContext(Context)
@@ -27,6 +28,11 @@ const Sidebar = () => {
     // console.log('allChats:', allChats);
 
     useEffect(() => {
+        const uchats = allChats.filter(chat => chat.users[0]._id === currUser._id || chat.users[1]._id === currUser._id);
+        // console.log('userChats:', userChats)
+        setUserChats(uchats);
+    }, [currChat])
+    useEffect(() => {
         if (!searchKey) setSerchedFriends([]);
         else handleSearch();
     }, [searchKey]);
@@ -35,9 +41,13 @@ const Sidebar = () => {
         e.code === 'Enter' && handleSearch();
     };
 
-    const userChats = allChats.filter(chat => chat.users[0]._id === currUser._id || chat.users[1]._id === currUser._id)
-    // console.log('userChats:', userChats)
 
+    async function sortNsetChats (chat) {
+        changeCurrChat(chat);
+        const nchats = await userChats.filter((uchat => uchat._id !== chat._id));
+        await nchats.unshift(chat);
+        setUserChats(nchats);
+    }
     const handleSearch = async () => {
         try {
             const withoutcurrUser = await users.filter(user => user._id !== currUser._id);
@@ -125,7 +135,7 @@ const Sidebar = () => {
                                         <div
                                             key={user._id}
                                             className="chat"
-                                            onClick={() => changeCurrChat(chat)}
+                                            onClick={() => sortNsetChats(chat)}
                                         >
                                             <div className='image'>{image}</div>
                                             <div className='username-n-last-message'>
