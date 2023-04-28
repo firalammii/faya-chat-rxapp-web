@@ -21,7 +21,7 @@ const TypingArea = () => {
 
     const sendMessage = async (e) => {
         e.preventDefault();
-        if (currChat) {
+        if (currChat && currUser) {
             console.log('sending ...');
             const msgObj = {
                 chatId: currChat._id,
