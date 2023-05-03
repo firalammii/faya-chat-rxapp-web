@@ -44,7 +44,7 @@ const Sidebar = () => {
 
     async function sortNsetChats (chat) {
         changeCurrChat(chat);
-        const nchats = await userChats.filter((uchat => uchat._id !== chat._id));
+        const nchats = await userChats.filter(uchat => uchat._id !== chat._id);
         await nchats.unshift(chat);
         setUserChats(nchats);
     }
@@ -155,3 +155,5 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+// 0946936534 dereje

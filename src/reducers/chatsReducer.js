@@ -25,14 +25,14 @@ export const chatsReducer = (state = initialState, action) => {
         }
 
         case ADD_MESSAGE: {
-            console.log('payload', action.payload);
+            console.log('ADD_MESSAGE payload:', action.payload);
             const nchats = state.chats.map(chat => {
                 if (chat._id === action.payload.chatId)
                     return { ...chat, messages: [...chat.messages, action.payload] };
 
                 return chat;
             });
-            console.log('nchats', nchats);
+            console.log('nchats:', nchats);
             return { ...state, chats: nchats };
         }
 
